@@ -1,0 +1,359 @@
+@import url('https://fonts.googleapis.com/css?family=Lato');
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol,
+ul {
+  list-style: none;
+}
+blockquote,
+q {
+  quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: '';
+  content: none;
+}
+
+table {
+  border: 0px solid #ccc;
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  table-layout: fixed;
+  color: #4a4848;
+}
+table caption {
+  font-size: 1.5em;
+  margin: 0.5em 0 0.75em;
+  color: #647fbd;
+}
+table tr {
+  background: #f8f8f8;
+  border-bottom: 1px solid #ddd;
+  padding: 0.35em;
+}
+table th,
+table td {
+  padding: 0.625em;
+  text-align: center;
+}
+table th {
+  font-size: 0.85em;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+@media screen and (max-width: 600px) {
+  table {
+    border: 0;
+  }
+  table caption {
+    font-size: 1.3em;
+  }
+  table thead {
+    border: none;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+  table tr {
+    border-bottom: none;
+    display: block;
+    margin-bottom: 0.625em;
+  }
+
+  table td {
+    border-bottom: 0px;
+    display: block;
+    font-size: 0.8em;
+    text-align: right;
+  }
+  table td:before {
+    /*
+    * aria-label has no advantage, it won't be read inside a table
+    content: attr(aria-label);
+    */
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  table td:last-child {
+    border-bottom: 0;
+  }
+}
+
+html {
+  box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+html,
+body,
+#root,
+.App {
+  height: 100%;
+}
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Lato', sans-serif;
+  background: #3f51b5;
+  background-image: linear-gradient(#3b3bd0, #3f51b5);
+}
+
+.App {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (min-width: 40em) {
+  .App {
+    width: 40%;
+  }
+}
+
+/* .pageContainer {
+} */
+
+.page {
+  background: #ffffff;
+  padding: 20px 30px;
+  box-shadow: 0 14px 8px 0 rgba(0, 0, 0, 0.08),
+    0 9px 16px 4px rgba(0, 0, 0, 0.12);
+  position: relative;
+  top: 40%;
+  transform: translateY(-50%);
+  min-height: 475px;
+  border-radius: 5px;
+}
+
+#logo {
+  border: 2px solid #3d44c4;
+  border-radius: 50%;
+  padding: 13px;
+  position: absolute;
+  top: -9%;
+  left: 43%;
+  background: white;
+}
+
+.title {
+  margin-top: 30px;
+  color: #3e4eb8;
+  font-size: 3em;
+}
+
+button {
+  box-shadow: 0 16px 18px 0 rgba(0, 0, 0, 0.13), 0 4px 6px 0 rgba(0, 0, 0, 0.16);
+  border-radius: 2px;
+  border: none;
+  color: #fff;
+  padding: 10px 15px;
+  outline: none;
+  cursor: pointer;
+  opacity: 1;
+  transition: opacity 150ms ease-in-out;
+  letter-spacing: 0.04em;
+  font-size: 0.8em;
+}
+
+.updating {
+  background: #f5f6d0;
+}
+
+button.deposit {
+  background: rgba(47, 196, 93, 0.94);
+}
+
+button.withdraw {
+  background: rgba(222, 28, 19, 0.94);
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+button:active {
+  box-shadow: none;
+}
+
+#date,
+#note {
+  padding: 5px;
+  margin-bottom: 20px;
+  width: 70%;
+}
+
+#note {
+  border: 1px solid #e5e3e3;
+  padding: 10px;
+}
+
+.status {
+  font-size: 1.2em;
+  color: #5189ab;
+  border: 2px dashed #e3e3e3;
+  padding: 1.2em;
+  max-width: 70%;
+  margin: 20px auto;
+}
+
+.controls {
+  position: absolute;
+  bottom: 0%;
+  width: 100%;
+  background: aliceblue;
+  right: 0%;
+  padding: 14px 10px;
+  border-top: 1px solid #d2e5f5;
+}
+
+.control label {
+  display: block;
+  font-size: 0.77em;
+  color: #7d7d7d;
+}
+
+#deposit {
+  min-width: 50%;
+  float: left;
+}
+
+#withdrawal {
+  min-width: 50%;
+  float: right;
+}
+
+.transactions {
+  margin: 0 auto;
+  max-width: 97%;
+  margin-top: 185px;
+  background: ghostwhite;
+  padding: 20px 0px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15), 0 10px 0 -5px #eee,
+    0 10px 1px -4px rgba(0, 0, 0, 0.15), 0 20px 0 -10px #eee,
+    0 20px 1px -9px rgba(0, 0, 0, 0.15);
+  /* Padding for demo purposes */
+}
