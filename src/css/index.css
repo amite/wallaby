@@ -237,7 +237,8 @@ body {
 /* .pageContainer {
 } */
 
-.page {
+.paper {
+  text-align: center;
   background: #ffffff;
   padding: 20px 30px;
   box-shadow: 0 14px 8px 0 rgba(0, 0, 0, 0.08),
@@ -285,6 +286,7 @@ button {
 
 button.deposit {
   background: rgba(47, 196, 93, 0.94);
+  margin-right: 10%;
 }
 
 button.withdraw {
