@@ -1,22 +1,23 @@
 const deposit = depositAmount => (prevState, props) => {
-  const { balance } = {
-    ...prevState,
-    balance: prevState.balance + depositAmount
+  const data = {
+    ...prevState.data,
+    balance: prevState.data.balance + depositAmount
   }
-  return { balance }
+
+  return { data }
 }
 
 export const hasMinimumBalance = (balance, expenditure) =>
   balance - expenditure > 0
 
 const spend = expenseAmount => (prevState, props) => {
-  const { balance } = {
-    ...prevState,
-    balance: hasMinimumBalance(prevState.balance, expenseAmount)
-      ? prevState.balance - expenseAmount
+  const data = {
+    ...prevState.data,
+    balance: hasMinimumBalance(prevState.data.balance, expenseAmount)
+      ? prevState.data.balance - expenseAmount
       : 0
   }
-  return { balance }
+  return { data }
 }
 
 export default {

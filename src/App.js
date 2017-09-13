@@ -27,7 +27,9 @@ class App extends Component {
   static DEFAULT_BALANCE_AMOUNT = 2000
 
   state = {
-    balance: App.DEFAULT_BALANCE_AMOUNT
+    data: {
+      balance: App.DEFAULT_BALANCE_AMOUNT
+    }
   }
 
   deposit = () => {
@@ -35,7 +37,9 @@ class App extends Component {
   }
 
   spend = () => {
-    if (!hasMinimumBalance(this.state.balance, App.DEFAULT_EXPENSE_AMOUNT)) {
+    if (
+      !hasMinimumBalance(this.state.data.balance, App.DEFAULT_EXPENSE_AMOUNT)
+    ) {
       console.log('you have insufficient balance')
     }
     this.setState(Api.spend(App.DEFAULT_EXPENSE_AMOUNT))
@@ -46,7 +50,7 @@ class App extends Component {
       <Wrapper size="small">
         <Paper>
           <Header />
-          <Status balance={this.state.balance} />
+          <Status balance={this.state.data.balance} />
           <Button onClick={this.deposit} theme="green">
             Add Deposit
           </Button>
