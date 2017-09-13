@@ -210,8 +210,7 @@ html {
 
 html,
 body,
-#root,
-.App {
+#root {
   height: 100%;
 }
 body {
@@ -220,18 +219,6 @@ body {
   font-family: 'Lato', sans-serif;
   background: #3f51b5;
   background-image: linear-gradient(#3b3bd0, #3f51b5);
-}
-
-.App {
-  width: 80%;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-@media (min-width: 40em) {
-  .App {
-    width: 40%;
-  }
 }
 
 /* .pageContainer {
@@ -253,31 +240,8 @@ body {
   font-size: 3em;
 }
 
-button {
-  box-shadow: 0 16px 18px 0 rgba(0, 0, 0, 0.13), 0 4px 6px 0 rgba(0, 0, 0, 0.16);
-  border-radius: 2px;
-  border: none;
-  color: #fff;
-  padding: 10px 15px;
-  outline: none;
-  cursor: pointer;
-  opacity: 1;
-  transition: opacity 150ms ease-in-out;
-  letter-spacing: 0.04em;
-  font-size: 0.8em;
-}
-
 .updating {
   background: #f5f6d0;
-}
-
-button.deposit {
-  background: rgba(47, 196, 93, 0.94);
-  margin-right: 10%;
-}
-
-button.withdraw {
-  background: rgba(222, 28, 19, 0.94);
 }
 
 button:hover {
