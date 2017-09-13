@@ -10,6 +10,12 @@ import Button from './components/Button'
 import Api, { hasMinimumBalance } from './api'
 import UI from './ui'
 
+import glamorous from 'glamorous'
+
+const StyledNotification = glamorous(Notification)({
+  backgroundColor: 'rgba(47, 196, 93, 0.94) !important'
+})
+
 class App extends Component {
   static DEFAULT_DEPOSIT_AMOUNT = 2000
   static DEFAULT_EXPENSE_AMOUNT = 500
@@ -62,7 +68,7 @@ class App extends Component {
             Add Expense
           </Button>
         </Paper>
-        <Notification
+        <StyledNotification
           isActive={this.state.ui.isActive}
           message={this.state.ui.message}
           action="Close"
