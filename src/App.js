@@ -1,20 +1,20 @@
 import React, { Component } from 'react'
 
-import wallet from './img/wallet.png'
+import Paper from './components/Paper'
+import Header from './components/Header'
+import Status from './components/Status'
+import Button from './components/Button'
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <div className="paper">
-          <header>
-            <img src={wallet} alt="Wallet" id="logo" />
-            <h1 className="title">Wallaby</h1>
-          </header>
-          <p className="status">Current Balance: 1,00,000</p>
-          <button className="deposit">Add Deposit</button>
-          <button className="withdraw">Add Expense</button>
-        </div>
+        <Paper>
+          <Header />
+          <Status />
+          <Button className="deposit">Add Deposit</Button>
+          <Button className="withdraw">Add Expense</Button>
+        </Paper>
       </div>
     )
   }

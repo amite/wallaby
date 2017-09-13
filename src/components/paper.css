@@ -1,0 +1,12 @@
+.paper {
+  text-align: center;
+  background: #ffffff;
+  padding: 20px 30px;
+  box-shadow: 0 14px 8px 0 rgba(0, 0, 0, 0.08),
+    0 9px 16px 4px rgba(0, 0, 0, 0.12);
+  position: relative;
+  top: 40%;
+  transform: translateY(-50%);
+  min-height: 475px;
+  border-radius: 5px;
+}
