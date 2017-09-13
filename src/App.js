@@ -1,48 +1,52 @@
 import React, { Component } from 'react'
+import { Notification } from 'react-notification'
 
-import glamorous from 'glamorous'
-
+import Wrapper from './components/Wrapper'
 import Paper from './components/Paper'
 import Header from './components/Header'
 import Status from './components/Status'
 import Button from './components/Button'
 
 import Api, { hasMinimumBalance } from './api'
-
-const Wrapper = glamorous.div(
-  ({ size }) => ({ width: size === 'small' ? '80%' : '90%' }),
-  {
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    height: '100%',
-    '@media(min-width: 40em)': {
-      width: '40%'
-    }
-  }
-)
+import UI from './ui'
 
 class App extends Component {
   static DEFAULT_DEPOSIT_AMOUNT = 2000
   static DEFAULT_EXPENSE_AMOUNT = 500
-  static DEFAULT_BALANCE_AMOUNT = 2000
+  static DEFAULT_BALANCE_AMOUNT = 2300
 
   state = {
     data: {
       balance: App.DEFAULT_BALANCE_AMOUNT
+    },
+    ui: {
+      isActive: false,
+      message: ''
     }
   }
 
   deposit = () => {
     this.setState(Api.deposit(App.DEFAULT_DEPOSIT_AMOUNT))
+    this.setState(
+      UI.notify({ type: 'deposit', amount: App.DEFAULT_DEPOSIT_AMOUNT })
+    )
   }
 
   spend = () => {
     if (
       !hasMinimumBalance(this.state.data.balance, App.DEFAULT_EXPENSE_AMOUNT)
     ) {
-      console.log('you have insufficient balance')
+      this.setState(UI.notify({ type: 'insufficient_balance', amount: 0 }))
+      return
     }
     this.setState(Api.spend(App.DEFAULT_EXPENSE_AMOUNT))
+    this.setState(
+      UI.notify({ type: 'spend', amount: App.DEFAULT_EXPENSE_AMOUNT })
+    )
+  }
+
+  closeNotification = () => {
+    this.setState(UI.close())
   }
 
   render() {
@@ -58,6 +62,12 @@ class App extends Component {
             Add Expense
           </Button>
         </Paper>
+        <Notification
+          isActive={this.state.ui.isActive}
+          message={this.state.ui.message}
+          action="Close"
+          onClick={this.closeNotification}
+        />
       </Wrapper>
     )
   }

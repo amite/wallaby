@@ -6,7 +6,8 @@
     "glamor": "^2.20.40",
     "glamorous": "^4.9.1",
     "react": "^15.6.1",
-    "react-dom": "^15.6.1"
+    "react-dom": "^15.6.1",
+    "react-notification": "^6.8.0"
   },
   "devDependencies": {
     "react-scripts": "1.0.13"

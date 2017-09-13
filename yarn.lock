@@ -5150,6 +5150,12 @@ react-html-attributes@^1.3.0:
   dependencies:
     html-element-attributes "^1.0.0"
 
+react-notification@^6.8.0:
+  version "6.8.0"
+  resolved "https://registry.yarnpkg.com/react-notification/-/react-notification-6.8.0.tgz#9cb7aa06c8e5085b4c0dc2e8d9aa1da1fbc61d93"
+  dependencies:
+    prop-types "^15.5.10"
+
 react-scripts@1.0.13:
   version "1.0.13"
   resolved "https://registry.yarnpkg.com/react-scripts/-/react-scripts-1.0.13.tgz#a51d775a4b195ab2653c562b735735c8f70cba0e"
