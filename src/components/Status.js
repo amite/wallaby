@@ -1,7 +1,7 @@
 import React from 'react'
 
-const Status = () => {
-  return <p className="status">Current Balance: 1,00,000</p>
+const Status = ({ balance }) => {
+  return <p className="status">Current Balance: {balance}</p>
 }
 
 export default Status
