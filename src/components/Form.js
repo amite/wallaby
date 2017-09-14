@@ -13,6 +13,8 @@ const Form = ({
   spend,
   note,
   date,
+  /* form ui state  */
+  isValid,
   /* change handlers  */
   handleChange,
   onDateChange
@@ -25,10 +27,10 @@ const Form = ({
         dateFormat="MMM Do YY"
       />
       <Note text={note} onChange={handleChange} />
-      <Button onClick={addDeposit} theme="green">
+      <Button disabled={isValid} onClick={addDeposit} theme="green">
         Add Deposit
       </Button>
-      <Button onClick={createExpense} theme="red">
+      <Button disabled={isValid} onClick={createExpense} theme="red">
         Add Expense
       </Button>
       <div className="controls">

@@ -31,7 +31,8 @@ class App extends Component {
       note: '',
       deposit: App.DEFAULT_DEPOSIT_AMOUNT,
       spend: App.DEFAULT_EXPENSE_AMOUNT,
-      date: moment()
+      date: moment(),
+      isValid: false
     },
     ui: {
       isActive: false,

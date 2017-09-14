@@ -7,7 +7,9 @@ const buttonTheme = {
   red: 'rgba(222, 28, 19, 0.94)'
 }
 
-const UnStyledButton = props => <button {...props} />
+const UnStyledButton = ({ disabled, ...rest }) => {
+  return <button disabled={disabled !== undefined && !disabled} {...rest} />
+}
 
 const Button = glamorous(UnStyledButton)(
   {
