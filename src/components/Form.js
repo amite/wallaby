@@ -5,16 +5,17 @@ import Note from './Note'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 const Form = ({
-  handleChange,
+  /* actions  */
   addDeposit,
   createExpense,
+  /* state  */
   deposit,
   spend,
   note,
-  depositAmt,
-  spendAmt,
-  onDateChange,
-  date
+  date,
+  /* change handlers  */
+  handleChange,
+  onDateChange
 }) => {
   return (
     <div>
