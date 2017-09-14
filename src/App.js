@@ -99,6 +99,29 @@ class App extends Component {
             onDateChange={this.onDateChange}
           />
         </Paper>
+        <div className="transactions">
+          <table>
+            <caption>Statement Summary</caption>
+            <thead>
+              <tr>
+                <th scope="col">Amount</th>
+                <th scope="col">Note</th>
+                <th scope="col">Type</th>
+                <th scope="col">Balance</th>
+              </tr>
+            </thead>
+            <tbody>
+              {this.state.data.transactions.map((transaction, index) => (
+                <tr key={index}>
+                  <td data-label="Amount">{transaction.amount}</td>
+                  <td data-label="Due Date">{transaction.note}</td>
+                  <td data-label="Type">{transaction.type}</td>
+                  <td data-label="Balance">{transaction.balance}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
         <StyledNotification
           isActive={isActive}
           message={message}
