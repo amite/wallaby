@@ -24,7 +24,6 @@ class App extends Component {
 
   state = {
     data: {
-      balance: App.DEFAULT_BALANCE_AMOUNT,
       transactions: []
     },
     form: {
@@ -39,9 +38,18 @@ class App extends Component {
     }
   }
 
+  get balance() {
+    const { transactions } = this.state.data
+    return (
+      (transactions[0] && transactions[0].balance) || App.DEFAULT_BALANCE_AMOUNT
+    )
+  }
+
   addDeposit = () => {
     const { deposit, date, note } = this.state.form
-    this.setState(Api.deposit({ amount: deposit, date, note }))
+    this.setState(
+      Api.deposit({ amount: deposit, date, note, balance: this.balance })
+    )
     this.setState(
       UI.notify({ type: 'deposit', amount: this.state.form.deposit })
     )
@@ -49,7 +57,7 @@ class App extends Component {
 
   createExpense = () => {
     const { spend } = this.state.form
-    if (!hasMinimumBalance(this.state.data.balance, spend)) {
+    if (!hasMinimumBalance(this.balance, spend)) {
       this.setState(UI.notify({ type: 'insufficient_balance', amount: 0 }))
       return
     }
@@ -75,13 +83,12 @@ class App extends Component {
   }
 
   render() {
-    const { balance } = this.state.data
     const { isActive, message } = this.state.ui
     return (
       <Wrapper size="small">
         <Paper>
           <Header />
-          <Status balance={balance} />
+          <Status balance={this.balance} />
           <Form
             {...this.state.form}
             addDeposit={this.addDeposit}
