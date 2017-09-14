@@ -221,6 +221,18 @@ body {
   background-image: linear-gradient(#3b3bd0, #3f51b5);
 }
 
+.react-datepicker__input-container {
+  width: 300px;
+}
+
+.react-datepicker__input-container input {
+  font-size: 13px;
+  line-height: 16px;
+  padding: 6px 10px 5px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
 /* .pageContainer {
 } */
 

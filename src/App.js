@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Notification } from 'react-notification'
+import moment from 'moment'
 
 import Wrapper from './components/Wrapper'
 import Paper from './components/Paper'
@@ -26,7 +27,8 @@ class App extends Component {
       balance: App.DEFAULT_BALANCE_AMOUNT,
       note: '',
       deposit: App.DEFAULT_DEPOSIT_AMOUNT,
-      spend: App.DEFAULT_EXPENSE_AMOUNT
+      spend: App.DEFAULT_EXPENSE_AMOUNT,
+      date: moment()
     },
     ui: {
       isActive: false,
@@ -48,6 +50,12 @@ class App extends Component {
     })
   }
 
+  onDateChange = date => {
+    this.setState({
+      data: { ...this.state.data, date: date }
+    })
+  }
+
   spend = () => {
     const { balance, spend } = this.state.data
     if (!hasMinimumBalance(balance, spend)) {
@@ -63,8 +71,8 @@ class App extends Component {
   }
 
   render() {
-    const { balance, note, deposit, spend } = this.state.data
-    const { isActive, message } = this.state.ui
+    const { balance, note, deposit, spend, date } = this.state.data
+    const { isActive, message, focused } = this.state.ui
     return (
       <Wrapper size="small">
         <Paper>
@@ -77,6 +85,10 @@ class App extends Component {
             depositAmt={deposit}
             spendAmt={spend}
             handleChange={this.handleChange}
+            focused={focused}
+            onDateChange={this.onDateChange}
+            onFocusChange={this.onFocusChange}
+            date={date}
           />
         </Paper>
         <StyledNotification

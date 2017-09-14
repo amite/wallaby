@@ -5,7 +5,9 @@
   "dependencies": {
     "glamor": "^2.20.40",
     "glamorous": "^4.9.1",
+    "moment": "^2.18.1",
     "react": "^15.6.1",
+    "react-datepicker": "^0.54.0",
     "react-dom": "^15.6.1",
     "react-notification": "^6.8.0"
   },

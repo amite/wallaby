@@ -2,10 +2,27 @@ import React from 'react'
 
 import Button from './Button'
 import Note from './Note'
-
-const Form = ({ handleChange, deposit, spend, note, depositAmt, spendAmt }) => {
+import DatePicker from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css'
+const Form = ({
+  handleChange,
+  deposit,
+  spend,
+  note,
+  depositAmt,
+  spendAmt,
+  focused,
+  onDateChange,
+  onFocusChange,
+  date
+}) => {
   return (
     <div>
+      <DatePicker
+        selected={date}
+        onChange={onDateChange}
+        dateFormat="MMM Do YY"
+      />
       <Note text={note} onChange={handleChange} />
       <Button onClick={deposit} theme="green">
         Add Deposit
