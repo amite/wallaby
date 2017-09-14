@@ -1,12 +1,11 @@
 const deposit = ({ amount, note, date, balance }) => (prevState, props) => {
-  // debugger
   const data = {
     ...prevState.data,
     transactions: [
       {
         type: 'Deposit',
         balance: balance + parseInt(amount, 10),
-        amount,
+        amount: parseInt(amount, 10),
         note,
         date
       },
@@ -14,23 +13,31 @@ const deposit = ({ amount, note, date, balance }) => (prevState, props) => {
     ]
   }
 
-  console.log(data)
+  return { data }
+}
+
+const spend = ({ amount, note, date, balance }) => (prevState, props) => {
+  const data = {
+    ...prevState.data,
+    transactions: [
+      {
+        type: 'Expense',
+        balance: hasMinimumBalance(balance, amount)
+          ? balance - parseInt(amount, 10)
+          : 0,
+        amount: parseInt(amount, 10),
+        note,
+        date
+      },
+      ...prevState.data.transactions
+    ]
+  }
 
   return { data }
 }
 
 export const hasMinimumBalance = (balance, expenditure) =>
   balance - expenditure > 0
-
-const spend = expenseAmount => (prevState, props) => {
-  const data = {
-    ...prevState.data,
-    balance: hasMinimumBalance(prevState.data.balance, expenseAmount)
-      ? prevState.data.balance - expenseAmount
-      : 0
-  }
-  return { data }
-}
 
 export default {
   deposit,

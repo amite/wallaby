@@ -12,4 +12,6 @@ const Wrapper = glamorous.div(
   }
 )
 
+Wrapper.displayName = 'Wrapper'
+
 export default Wrapper

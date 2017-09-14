@@ -56,12 +56,14 @@ class App extends Component {
   }
 
   createExpense = () => {
-    const { spend } = this.state.form
+    const { spend, date, note } = this.state.form
     if (!hasMinimumBalance(this.balance, spend)) {
       this.setState(UI.notify({ type: 'insufficient_balance', amount: 0 }))
       return
     }
-    this.setState(Api.spend(spend))
+    this.setState(
+      Api.spend({ amount: spend, date, note, balance: this.balance })
+    )
     this.setState(UI.notify({ type: 'spend', amount: spend }))
   }
 
@@ -95,7 +97,6 @@ class App extends Component {
             createExpense={this.createExpense}
             handleChange={this.handleChange}
             onDateChange={this.onDateChange}
-            onFocusChange={this.onFocusChange}
           />
         </Paper>
         <StyledNotification
