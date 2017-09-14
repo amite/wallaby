@@ -1,7 +1,7 @@
 const deposit = depositAmount => (prevState, props) => {
   const data = {
     ...prevState.data,
-    balance: prevState.data.balance + depositAmount
+    balance: prevState.data.balance + parseInt(depositAmount, 10)
   }
   return { data }
 }
