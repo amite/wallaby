@@ -269,16 +269,11 @@ button:active {
   box-shadow: none;
 }
 
-#date,
-#note {
-  padding: 5px;
-  margin-bottom: 20px;
-  width: 70%;
-}
-
-#note {
+.note {
   border: 1px solid #e5e3e3;
   padding: 10px;
+  margin-bottom: 5px;
+  width: 70%;
 }
 
 .status {

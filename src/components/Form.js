@@ -17,7 +17,8 @@ const Form = ({
   isValid,
   /* change handlers  */
   handleChange,
-  onDateChange
+  onDateChange,
+  onNoteChange
 }) => {
   return (
     <div>
@@ -26,7 +27,7 @@ const Form = ({
         onChange={onDateChange}
         dateFormat="MMM Do YY"
       />
-      <Note text={note} onChange={handleChange} />
+      <Note text={note} onChange={onNoteChange} isValid={isValid} />
       <Button disabled={isValid} onClick={addDeposit} theme="green">
         Add Deposit
       </Button>

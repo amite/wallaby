@@ -24,7 +24,12 @@ const Button = glamorous(UnStyledButton)(
     opacity: '1',
     transition: 'opacity 150ms ease-in-out',
     letterSpacing: '0.04em',
-    fontSize: '0.8em'
+    fontSize: '0.8em',
+    marginTop: '10px',
+    ':disabled': {
+      opacity: '0.6',
+      cursor: 'not-allowed'
+    }
   },
   ({ theme }) => ({
     backgroundColor: theme === 'green' ? buttonTheme.green : buttonTheme.red,

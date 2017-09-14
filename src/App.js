@@ -90,6 +90,16 @@ class App extends Component {
     })
   }
 
+  onNoteChange = evt => {
+    this.setState({
+      form: {
+        ...this.state.form,
+        note: evt.target.value,
+        isValid: evt.target.value !== '' ? true : false
+      }
+    })
+  }
+
   closeNotification = () => {
     this.setState(UI.close())
   }
@@ -107,6 +117,7 @@ class App extends Component {
             createExpense={this.createExpense}
             handleChange={this.handleChange}
             onDateChange={this.onDateChange}
+            onNoteChange={this.onNoteChange}
           />
         </Paper>
         {this.hasTransactions && (
