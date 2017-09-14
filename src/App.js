@@ -24,7 +24,9 @@ class App extends Component {
 
   state = {
     data: {
-      balance: App.DEFAULT_BALANCE_AMOUNT,
+      balance: App.DEFAULT_BALANCE_AMOUNT
+    },
+    form: {
       note: '',
       deposit: App.DEFAULT_DEPOSIT_AMOUNT,
       spend: App.DEFAULT_EXPENSE_AMOUNT,
@@ -36,29 +38,16 @@ class App extends Component {
     }
   }
 
-  deposit = () => {
-    this.setState(Api.deposit(this.state.data.deposit))
+  addDeposit = () => {
+    this.setState(Api.deposit(this.state.form.deposit))
     this.setState(
-      UI.notify({ type: 'deposit', amount: this.state.data.deposit })
+      UI.notify({ type: 'deposit', amount: this.state.form.deposit })
     )
   }
 
-  handleChange = evt => {
-    evt.preventDefault()
-    this.setState({
-      data: { ...this.state.data, [evt.target.name]: evt.target.value }
-    })
-  }
-
-  onDateChange = date => {
-    this.setState({
-      data: { ...this.state.data, date: date }
-    })
-  }
-
-  spend = () => {
-    const { balance, spend } = this.state.data
-    if (!hasMinimumBalance(balance, spend)) {
+  createExpense = () => {
+    const { spend } = this.state.form
+    if (!hasMinimumBalance(this.state.data.balance, spend)) {
       this.setState(UI.notify({ type: 'insufficient_balance', amount: 0 }))
       return
     }
@@ -66,29 +55,38 @@ class App extends Component {
     this.setState(UI.notify({ type: 'spend', amount: spend }))
   }
 
+  handleChange = evt => {
+    evt.preventDefault()
+    this.setState({
+      form: { ...this.state.form, [evt.target.name]: evt.target.value }
+    })
+  }
+
+  onDateChange = date => {
+    this.setState({
+      form: { ...this.state.form, date: date }
+    })
+  }
+
   closeNotification = () => {
     this.setState(UI.close())
   }
 
   render() {
-    const { balance, note, deposit, spend, date } = this.state.data
-    const { isActive, message, focused } = this.state.ui
+    const { balance } = this.state.data
+    const { isActive, message } = this.state.ui
     return (
       <Wrapper size="small">
         <Paper>
           <Header />
           <Status balance={balance} />
           <Form
-            note={note}
-            deposit={this.deposit}
-            spend={this.spend}
-            depositAmt={deposit}
-            spendAmt={spend}
+            {...this.state.form}
+            addDeposit={this.addDeposit}
+            createExpense={this.createExpense}
             handleChange={this.handleChange}
-            focused={focused}
             onDateChange={this.onDateChange}
             onFocusChange={this.onFocusChange}
-            date={date}
           />
         </Paper>
         <StyledNotification

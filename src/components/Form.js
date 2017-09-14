@@ -6,14 +6,14 @@ import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 const Form = ({
   handleChange,
+  addDeposit,
+  createExpense,
   deposit,
   spend,
   note,
   depositAmt,
   spendAmt,
-  focused,
   onDateChange,
-  onFocusChange,
   date
 }) => {
   return (
@@ -24,17 +24,17 @@ const Form = ({
         dateFormat="MMM Do YY"
       />
       <Note text={note} onChange={handleChange} />
-      <Button onClick={deposit} theme="green">
+      <Button onClick={addDeposit} theme="green">
         Add Deposit
       </Button>
-      <Button onClick={spend} theme="red">
+      <Button onClick={createExpense} theme="red">
         Add Expense
       </Button>
       <div className="controls">
         <div className="control" id="deposit">
           <label htmlFor="">
             add &nbsp;
-            {depositAmt}
+            {deposit}
           </label>
           <input
             onChange={handleChange}
@@ -43,14 +43,14 @@ const Form = ({
             max={10000}
             step={500}
             name="deposit"
-            value={depositAmt}
+            value={deposit}
           />
         </div>
 
         <div className="control" id="spend">
           <label htmlFor="">
             spend &nbsp;
-            {spendAmt}
+            {spend}
           </label>
           <input
             onChange={handleChange}
@@ -58,7 +58,7 @@ const Form = ({
             max={3000}
             step={50}
             name="spend"
-            value={spendAmt}
+            value={spend}
           />
         </div>
       </div>
