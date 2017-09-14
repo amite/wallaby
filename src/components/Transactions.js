@@ -1,8 +1,9 @@
 import React from 'react'
+import glamorous from 'glamorous'
 
-const Transactions = ({ transactions, transactionsCount }) => {
+const UnstyledTransactions = ({ transactions, transactionsCount, ...rest }) => {
   return (
-    <div className="transactions">
+    <div {...rest}>
       <table>
         <caption>
           Statement Summary <small>({transactionsCount} items)</small>
@@ -29,5 +30,16 @@ const Transactions = ({ transactions, transactionsCount }) => {
     </div>
   )
 }
+
+const Transactions = glamorous(UnstyledTransactions)({
+  margin: '0 auto',
+  maxWidth: '97%',
+  marginTop: '18%',
+  background: 'ghostwhite',
+  padding: '20px 0px',
+  boxShadow:
+    '0 1px 1px rgba(0, 0, 0, 0.15), 0 10px 0 -5px #eee, 0 10px 1px -4px rgba(0, 0, 0, 0.15), 0 20px 0 -10px #eee, 0 20px 1px -9px rgba(0, 0, 0, 0.15)'
+  /* Padding for demo purposes */
+})
 
 export default Transactions

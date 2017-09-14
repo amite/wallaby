@@ -1,18 +1,24 @@
 import React from 'react'
 
-import glamorous from 'glamorous'
+import glamorous, { Div } from 'glamorous'
 
 const Error = glamorous.p({
   fontSize: '0.5em',
   color: 'red'
 })
 
+const NoteStyles = {
+  border: '1px solid #e5e3e3',
+  padding: '10px',
+  marginBottom: '5px',
+  width: '70%'
+}
+
 const Note = ({ text, onChange, isValid }) => {
   return (
-    <div>
+    <Div css={{ '& textarea': NoteStyles }}>
       <textarea
         cols="50"
-        className="note"
         rows="2"
         name="note"
         placeholder="Please add a note"
@@ -20,7 +26,7 @@ const Note = ({ text, onChange, isValid }) => {
         onChange={onChange}
       />
       {!isValid && <Error>Note is required</Error>}
-    </div>
+    </Div>
   )
 }
 
