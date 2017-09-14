@@ -63,6 +63,20 @@ class App extends Component {
     this.setState(
       UI.notify({ type: 'deposit', amount: this.state.form.deposit })
     )
+    this.resetForm()
+  }
+
+  resetForm = () => {
+    this.setState({
+      form: {
+        ...this.state.form,
+        note: '',
+        date: moment(),
+        deposit: App.DEFAULT_DEPOSIT_AMOUNT,
+        spend: App.DEFAULT_EXPENSE_AMOUNT,
+        isValid: false
+      }
+    })
   }
 
   createExpense = () => {
@@ -75,6 +89,7 @@ class App extends Component {
       Api.spend({ amount: spend, date, note, balance: this.balance })
     )
     this.setState(UI.notify({ type: 'spend', amount: spend }))
+    this.resetForm()
   }
 
   handleChange = evt => {
