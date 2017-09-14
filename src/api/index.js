@@ -1,8 +1,22 @@
-const deposit = depositAmount => (prevState, props) => {
+const deposit = ({ amount, note, date }) => (prevState, props) => {
+  // debugger
   const data = {
     ...prevState.data,
-    balance: prevState.data.balance + parseInt(depositAmount, 10)
+    balance: prevState.data.balance + parseInt(amount, 10),
+    transactions: [
+      ...prevState.data.transactions,
+      {
+        type: 'Deposit',
+        balance: prevState.data.balance + parseInt(amount, 10),
+        amount,
+        note,
+        date
+      }
+    ]
   }
+
+  console.log(data)
+
   return { data }
 }
 

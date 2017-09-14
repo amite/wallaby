@@ -24,7 +24,8 @@ class App extends Component {
 
   state = {
     data: {
-      balance: App.DEFAULT_BALANCE_AMOUNT
+      balance: App.DEFAULT_BALANCE_AMOUNT,
+      transactions: []
     },
     form: {
       note: '',
@@ -39,7 +40,8 @@ class App extends Component {
   }
 
   addDeposit = () => {
-    this.setState(Api.deposit(this.state.form.deposit))
+    const { deposit, date, note } = this.state.form
+    this.setState(Api.deposit({ amount: deposit, date, note }))
     this.setState(
       UI.notify({ type: 'deposit', amount: this.state.form.deposit })
     )
