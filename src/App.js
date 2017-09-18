@@ -42,10 +42,9 @@ class App extends Component {
     }
   }
 
-  componentDidMount() {
-    HTTP.getTransactions().then(({ data }) => {
-      this.setState(Api.loadTransactions(data))
-    })
+  async componentDidMount() {
+    const { data } = await HTTP.getTransactions()
+    this.setState(Api.loadTransactions(data))
   }
 
   get balance() {
