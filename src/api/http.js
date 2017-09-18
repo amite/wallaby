@@ -3,7 +3,7 @@ import axios from 'axios'
 const APIEndpoint = `http://localhost:3004`
 const TransactionsEndpoint = `${APIEndpoint}/transactions`
 
-const getTransactions = () => {
+const loadTransactions = () => {
   return axios.get(TransactionsEndpoint)
 }
 
@@ -12,6 +12,6 @@ const saveTransaction = transactionData => {
 }
 
 export default {
-  getTransactions,
+  loadTransactions,
   saveTransaction
 }

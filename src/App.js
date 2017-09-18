@@ -20,6 +20,7 @@ const StyledNotification = glamorous(Notification)({
 })
 
 export const DEPOSIT = 'Deposit'
+export const EXPENSE = 'Expense'
 
 class App extends Component {
   static DEFAULT_DEPOSIT_AMOUNT = 2000
@@ -47,8 +48,8 @@ class App extends Component {
   async componentDidMount() {
     this.setState(UI.startLoading())
     try {
-      const { data } = await HTTP.getTransactions()
-      this.setState(Api.loadTransactions(data))
+      const { data } = await HTTP.loadTransactions()
+      this.setState(Api.setTransactions(data))
     } catch (error) {
       // fire notification - data not loaded
       // setState - set a flag to show try again ui
@@ -80,7 +81,7 @@ class App extends Component {
       date,
       type: DEPOSIT,
       note,
-      balance: Api.getNewBalance({
+      balance: Api.calculateNewBalance({
         oldBalance: this.balance,
         amount: parseInt(deposit, 10),
         type: DEPOSIT
@@ -102,6 +103,35 @@ class App extends Component {
     this.resetForm()
   }
 
+  createExpense = async () => {
+    const { spend, date, note } = this.state.form
+    if (!hasMinimumBalance(this.balance, spend)) {
+      this.setState(UI.notify({ type: 'insufficient_balance', amount: 0 }))
+      return
+    }
+
+    const newTransaction = {
+      amount: parseInt(spend, 10),
+      date,
+      type: EXPENSE,
+      note,
+      balance: Api.calculateNewBalance({
+        oldBalance: this.balance,
+        amount: parseInt(spend, 10),
+        type: EXPENSE
+      })
+    }
+
+    this.setState(Api.addTransaction(newTransaction))
+    try {
+      await HTTP.saveTransaction(newTransaction)
+    } catch (error) {
+      // fire notification
+    }
+    this.setState(UI.notify({ type: EXPENSE, amount: spend }))
+    this.resetForm()
+  }
+
   resetForm = () => {
     this.setState({
       form: {
@@ -113,19 +143,6 @@ class App extends Component {
         isValid: false
       }
     })
-  }
-
-  createExpense = () => {
-    const { spend, date, note } = this.state.form
-    if (!hasMinimumBalance(this.balance, spend)) {
-      this.setState(UI.notify({ type: 'insufficient_balance', amount: 0 }))
-      return
-    }
-    this.setState(
-      Api.spend({ amount: spend, date, note, balance: this.balance })
-    )
-    this.setState(UI.notify({ type: 'spend', amount: spend }))
-    this.resetForm()
   }
 
   handleChange = evt => {
