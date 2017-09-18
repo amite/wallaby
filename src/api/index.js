@@ -16,6 +16,15 @@ const deposit = ({ amount, note, date, balance }) => (prevState, props) => {
   return { data }
 }
 
+const loadTransactions = transactionsData => (prevState, props) => {
+  const newState = {
+    ...prevState.data,
+    transactions: [...transactionsData, prevState.data.transactions],
+    loading: false
+  }
+  return { data: newState }
+}
+
 const spend = ({ amount, note, date, balance }) => (prevState, props) => {
   const data = {
     ...prevState.data,
@@ -41,5 +50,6 @@ export const hasMinimumBalance = (balance, expenditure) =>
 
 export default {
   deposit,
-  spend
+  spend,
+  loadTransactions
 }

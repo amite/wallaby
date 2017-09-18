@@ -44,16 +44,7 @@ class App extends Component {
 
   componentDidMount() {
     HTTP.getTransactions().then(({ data }) => {
-      console.log(data)
-
-      this.setState(prevState => {
-        const newState = {
-          ...prevState.data,
-          transactions: [...data, prevState.data.transactions],
-          loading: false
-        }
-        return { data: newState }
-      })
+      this.setState(Api.loadTransactions(data))
     })
   }
 
