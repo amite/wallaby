@@ -19,8 +19,7 @@ const deposit = ({ amount, note, date, balance }) => (prevState, props) => {
 const loadTransactions = transactionsData => (prevState, props) => {
   const newState = {
     ...prevState.data,
-    transactions: [...transactionsData, prevState.data.transactions],
-    loading: false
+    transactions: [...transactionsData]
   }
   return { data: newState }
 }
