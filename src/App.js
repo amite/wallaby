@@ -43,8 +43,13 @@ class App extends Component {
   }
 
   async componentDidMount() {
-    const { data } = await HTTP.getTransactions()
-    this.setState(Api.loadTransactions(data))
+    try {
+      const { data } = await HTTP.getTransactions()
+      this.setState(Api.loadTransactions(data))
+    } catch (error) {
+      // fire notification - data not loaded
+      // setState - set a flag to show try again ui
+    }
   }
 
   get balance() {
@@ -62,14 +67,26 @@ class App extends Component {
     return this.transactions.length > 0
   }
 
-  addDeposit = () => {
+  addDeposit = async () => {
     const { deposit, date, note } = this.state.form
-    this.setState(
-      Api.deposit({ amount: deposit, date, note, balance: this.balance })
-    )
-    this.setState(
-      UI.notify({ type: 'deposit', amount: this.state.form.deposit })
-    )
+    const depositData = {
+      amount: deposit,
+      date,
+      type: 'Deposit',
+      note,
+      balance: this.balance
+    }
+    try {
+      await HTTP.addTransaction(depositData)
+      this.setState(Api.deposit(depositData))
+      this.setState(UI.stopLoading())
+      this.setState(
+        UI.notify({ type: 'deposit', amount: this.state.form.deposit })
+      )
+    } catch (error) {
+      // fire notification
+    }
+
     this.resetForm()
   }
 
@@ -142,11 +159,11 @@ class App extends Component {
             onNoteChange={this.onNoteChange}
           />
         </Paper>
-        {this.loading || !this.transactions ? (
+        {!this.loading || !this.transactions ? (
           <p>loading...</p>
         ) : (
           <Transactions
-            transactions={this.transactions}
+            transactions={this.transactions.reverse()}
             transactionsCount={this.transactions.length}
           />
         )}

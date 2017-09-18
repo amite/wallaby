@@ -12,6 +12,15 @@ const notify = ({ type, amount }) => (prevState, props) => {
   return { ui }
 }
 
+const stopLoading = () => (prevState, props) => {
+  const ui = {
+    ...prevState.ui,
+    loading: false
+  }
+
+  return { ui }
+}
+
 const close = () => (prevState, props) => {
   const ui = {
     ...prevState.ui,

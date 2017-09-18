@@ -7,8 +7,11 @@ const getTransactions = () => {
   return axios.get(TransactionsEndpoint)
 }
 
-const addTransaction = transactionData => {}
+const addTransaction = transactionData => {
+  return axios.post(TransactionsEndpoint, transactionData)
+}
 
 export default {
-  getTransactions
+  getTransactions,
+  addTransaction
 }
