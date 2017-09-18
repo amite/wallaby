@@ -1,19 +1,19 @@
 {
   "transactions": [
     {
-      "amount": "500",
-      "date": "2017-09-18T09:08:28.408Z",
+      "amount": 2000,
+      "date": "2017-09-18T10:27:48.837Z",
       "type": "Deposit",
-      "note": "aaaa",
-      "balance": 2800,
+      "note": "aaa",
+      "balance": 4300,
       "id": 1
     },
     {
-      "amount": "5500",
-      "date": "2017-09-18T09:09:01.873Z",
+      "amount": 4500,
+      "date": "2017-09-18T10:27:52.790Z",
       "type": "Deposit",
-      "note": "bbbb",
-      "balance": 8300,
+      "note": "bbb",
+      "balance": 8800,
       "id": 2
     }
   ]

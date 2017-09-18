@@ -1,11 +1,16 @@
-const deposit = ({ amount, note, date, balance }) => (prevState, props) => {
+import { DEPOSIT } from '../App'
+
+const addTransaction = ({ amount, note, date, balance, type }) => (
+  prevState,
+  props
+) => {
   const data = {
     ...prevState.data,
     transactions: [
       ...prevState.data.transactions,
       {
-        type: 'Deposit',
-        balance: balance + parseInt(amount, 10),
+        type,
+        balance,
         amount: parseInt(amount, 10),
         note,
         date
@@ -15,6 +20,9 @@ const deposit = ({ amount, note, date, balance }) => (prevState, props) => {
 
   return { data }
 }
+
+const getNewBalance = ({ oldBalance, amount, type }) =>
+  type === DEPOSIT ? oldBalance + amount : oldBalance - amount
 
 const loadTransactions = transactionsData => (prevState, props) => {
   const newState = {
@@ -48,7 +56,8 @@ export const hasMinimumBalance = (balance, expenditure) =>
   balance - expenditure > 0
 
 export default {
-  deposit,
   spend,
-  loadTransactions
+  addTransaction,
+  loadTransactions,
+  getNewBalance
 }

@@ -19,6 +19,8 @@ const StyledNotification = glamorous(Notification)({
   backgroundColor: 'rgba(47, 196, 93, 0.94) !important'
 })
 
+export const DEPOSIT = 'Deposit'
+
 class App extends Component {
   static DEFAULT_DEPOSIT_AMOUNT = 2000
   static DEFAULT_EXPENSE_AMOUNT = 500
@@ -73,33 +75,29 @@ class App extends Component {
   addDeposit = async () => {
     const { deposit, date, note } = this.state.form
 
+    const newTransaction = {
+      amount: parseInt(deposit, 10),
+      date,
+      type: DEPOSIT,
+      note,
+      balance: Api.getNewBalance({
+        oldBalance: this.balance,
+        amount: parseInt(deposit, 10),
+        type: DEPOSIT
+      })
+    }
+
+    this.setState(Api.addTransaction(newTransaction))
+
     this.setState(UI.startLoading())
     try {
-      await HTTP.addTransaction({
-        amount: deposit,
-        date,
-        type: 'Deposit',
-        note,
-        balance: this.balance + parseInt(deposit, 10)
-      })
+      await HTTP.saveTransaction(newTransaction)
     } catch (error) {
       // fire notification
     }
     this.setState(UI.stopLoading())
 
-    this.setState(
-      Api.deposit({
-        amount: deposit,
-        date,
-        type: 'Deposit',
-        note,
-        balance: this.balance
-      })
-    )
-
-    this.setState(
-      UI.notify({ type: 'deposit', amount: this.state.form.deposit })
-    )
+    this.setState(UI.notify({ type: DEPOSIT, amount: this.state.form.deposit }))
 
     this.resetForm()
   }
