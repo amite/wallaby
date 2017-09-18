@@ -15,7 +15,7 @@ const notify = ({ type, amount }) => (prevState, props) => {
 const stopLoading = () => (prevState, props) => {
   const ui = {
     ...prevState.ui,
-    loading: false
+    isLoading: false
   }
 
   return { ui }
@@ -24,7 +24,7 @@ const stopLoading = () => (prevState, props) => {
 const startLoading = () => (prevState, props) => {
   const ui = {
     ...prevState.ui,
-    loading: true
+    isLoading: true
   }
 
   return { ui }

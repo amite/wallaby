@@ -27,7 +27,7 @@ class App extends Component {
   static DEFAULT_EXPENSE_AMOUNT = 500
   static DEFAULT_BALANCE_AMOUNT = 2300
 
-  state = {
+  initialState = {
     data: {
       transactions: []
     },
@@ -41,8 +41,12 @@ class App extends Component {
     ui: {
       isActive: false,
       message: '',
-      loading: false
+      isLoading: false
     }
+  }
+
+  state = {
+    ...this.initialState
   }
 
   async componentDidMount() {
@@ -73,23 +77,30 @@ class App extends Component {
     return this.transactions.length > 0
   }
 
-  addDeposit = async () => {
-    const { deposit, date, note } = this.state.form
-
-    const newTransaction = {
-      amount: parseInt(deposit, 10),
+  buildNewTransaction = ({ amount, type }) => {
+    const { date, note } = this.state.form
+    return {
+      amount: parseInt(amount, 10),
       date,
-      type: DEPOSIT,
+      type,
       note,
       balance: Api.calculateNewBalance({
         oldBalance: this.balance,
-        amount: parseInt(deposit, 10),
-        type: DEPOSIT
+        amount: parseInt(amount, 10),
+        type
       })
     }
+  }
+
+  addDeposit = async () => {
+    const { deposit } = this.state.form
+
+    const newTransaction = this.buildNewTransaction({
+      amount: deposit,
+      type: DEPOSIT
+    })
 
     this.setState(Api.addTransaction(newTransaction))
-
     this.setState(UI.startLoading())
     try {
       await HTTP.saveTransaction(newTransaction)
@@ -99,35 +110,30 @@ class App extends Component {
     this.setState(UI.stopLoading())
 
     this.setState(UI.notify({ type: DEPOSIT, amount: this.state.form.deposit }))
-
     this.resetForm()
   }
 
   createExpense = async () => {
-    const { spend, date, note } = this.state.form
+    const { spend } = this.state.form
     if (!hasMinimumBalance(this.balance, spend)) {
       this.setState(UI.notify({ type: 'insufficient_balance', amount: 0 }))
       return
     }
 
-    const newTransaction = {
-      amount: parseInt(spend, 10),
-      date,
-      type: EXPENSE,
-      note,
-      balance: Api.calculateNewBalance({
-        oldBalance: this.balance,
-        amount: parseInt(spend, 10),
-        type: EXPENSE
-      })
-    }
+    const newTransaction = this.buildNewTransaction({
+      amount: spend,
+      type: EXPENSE
+    })
 
     this.setState(Api.addTransaction(newTransaction))
+    this.setState(UI.startLoading())
     try {
       await HTTP.saveTransaction(newTransaction)
     } catch (error) {
       // fire notification
     }
+    this.setState(UI.stopLoading())
+
     this.setState(UI.notify({ type: EXPENSE, amount: spend }))
     this.resetForm()
   }
@@ -136,11 +142,7 @@ class App extends Component {
     this.setState({
       form: {
         ...this.state.form,
-        note: '',
-        date: moment(),
-        deposit: App.DEFAULT_DEPOSIT_AMOUNT,
-        spend: App.DEFAULT_EXPENSE_AMOUNT,
-        isValid: false
+        ...this.initialState.form
       }
     })
   }
@@ -173,7 +175,7 @@ class App extends Component {
   }
 
   render() {
-    const { isActive, message } = this.state.ui
+    const { isActive, message, isLoading } = this.state.ui
     return (
       <Wrapper size="small">
         <Paper>
@@ -188,7 +190,7 @@ class App extends Component {
             onNoteChange={this.onNoteChange}
           />
         </Paper>
-        {this.state.ui.loading || !this.hasTransactions ? (
+        {isLoading || !this.hasTransactions ? (
           <p>loading...</p>
         ) : (
           <Transactions

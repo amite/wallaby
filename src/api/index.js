@@ -1,21 +1,9 @@
 import { DEPOSIT } from '../App'
 
-const addTransaction = ({ amount, note, date, balance, type }) => (
-  prevState,
-  props
-) => {
+const addTransaction = newTransactionData => (prevState, props) => {
   const data = {
     ...prevState.data,
-    transactions: [
-      ...prevState.data.transactions,
-      {
-        type,
-        balance,
-        amount: parseInt(amount, 10),
-        note,
-        date
-      }
-    ]
+    transactions: [...prevState.data.transactions, newTransactionData]
   }
 
   return { data }
