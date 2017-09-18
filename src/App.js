@@ -56,7 +56,8 @@ class App extends Component {
 
   get balance() {
     return (
-      (this.hasTransactions && this.transactions[0].balance) ||
+      (this.hasTransactions &&
+        this.transactions[this.transactions.length - 1].balance) ||
       App.DEFAULT_BALANCE_AMOUNT
     )
   }
@@ -71,22 +72,31 @@ class App extends Component {
 
   addDeposit = async () => {
     const { deposit, date, note } = this.state.form
-    const depositData = {
-      amount: deposit,
-      date,
-      type: 'Deposit',
-      note,
-      balance: this.balance
-    }
+
     this.setState(UI.startLoading())
     try {
-      await HTTP.addTransaction(depositData)
+      await HTTP.addTransaction({
+        amount: deposit,
+        date,
+        type: 'Deposit',
+        note,
+        balance: this.balance + parseInt(deposit, 10)
+      })
     } catch (error) {
       // fire notification
     }
-
-    this.setState(Api.deposit(depositData))
     this.setState(UI.stopLoading())
+
+    this.setState(
+      Api.deposit({
+        amount: deposit,
+        date,
+        type: 'Deposit',
+        note,
+        balance: this.balance
+      })
+    )
+
     this.setState(
       UI.notify({ type: 'deposit', amount: this.state.form.deposit })
     )
@@ -167,7 +177,7 @@ class App extends Component {
           <p>loading...</p>
         ) : (
           <Transactions
-            transactions={this.transactions.reverse()}
+            transactions={this.transactions}
             transactionsCount={this.transactions.length}
           />
         )}
