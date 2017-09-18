@@ -38,11 +38,12 @@ class App extends Component {
     ui: {
       isActive: false,
       message: '',
-      loading: true
+      loading: false
     }
   }
 
   async componentDidMount() {
+    this.setState(UI.startLoading())
     try {
       const { data } = await HTTP.getTransactions()
       this.setState(Api.loadTransactions(data))
@@ -50,6 +51,7 @@ class App extends Component {
       // fire notification - data not loaded
       // setState - set a flag to show try again ui
     }
+    this.setState(UI.stopLoading())
   }
 
   get balance() {
@@ -76,16 +78,18 @@ class App extends Component {
       note,
       balance: this.balance
     }
+    this.setState(UI.startLoading())
     try {
       await HTTP.addTransaction(depositData)
-      this.setState(Api.deposit(depositData))
-      this.setState(UI.stopLoading())
-      this.setState(
-        UI.notify({ type: 'deposit', amount: this.state.form.deposit })
-      )
     } catch (error) {
       // fire notification
     }
+
+    this.setState(Api.deposit(depositData))
+    this.setState(UI.stopLoading())
+    this.setState(
+      UI.notify({ type: 'deposit', amount: this.state.form.deposit })
+    )
 
     this.resetForm()
   }
@@ -159,7 +163,7 @@ class App extends Component {
             onNoteChange={this.onNoteChange}
           />
         </Paper>
-        {!this.loading || !this.transactions ? (
+        {this.state.ui.loading || !this.hasTransactions ? (
           <p>loading...</p>
         ) : (
           <Transactions

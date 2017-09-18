@@ -21,6 +21,15 @@ const stopLoading = () => (prevState, props) => {
   return { ui }
 }
 
+const startLoading = () => (prevState, props) => {
+  const ui = {
+    ...prevState.ui,
+    loading: true
+  }
+
+  return { ui }
+}
+
 const close = () => (prevState, props) => {
   const ui = {
     ...prevState.ui,
@@ -32,5 +41,7 @@ const close = () => (prevState, props) => {
 
 export default {
   notify,
-  close
+  close,
+  startLoading,
+  stopLoading
 }
