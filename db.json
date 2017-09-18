@@ -1,0 +1,36 @@
+{
+  "transactions": [
+    {
+      "id": 1,
+      "note": "mobile phone repair",
+      "amount": 3500,
+      "type": "Expense",
+      "balance": 1800,
+      "date": "9/13/2017"
+    },
+    {
+      "id": 2,
+      "note": "return from friend",
+      "amount": 1000,
+      "type": "Deposit",
+      "balance": 2800,
+      "date": "10/13/2017"
+    },
+    {
+      "note": "Cafe Coffee Day",
+      "amount": 300,
+      "type": "Expense",
+      "balance": 2500,
+      "date": "10/13/2017",
+      "id": 3
+    },
+    {
+      "note": "lunch with friends",
+      "amount": 350,
+      "type": "Expense",
+      "balance": 2150,
+      "date": "10/13/2017",
+      "id": 4
+    }
+  ]
+}
