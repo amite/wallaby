@@ -10,6 +10,7 @@ import Form from './components/Form'
 import Transactions from './components/Transactions'
 
 import Api, { hasMinimumBalance } from './api'
+import HTTP from './api/http'
 import UI from './ui'
 
 import glamorous from 'glamorous'
@@ -36,8 +37,24 @@ class App extends Component {
     },
     ui: {
       isActive: false,
-      message: ''
+      message: '',
+      loading: true
     }
+  }
+
+  componentDidMount() {
+    HTTP.getTransactions().then(({ data }) => {
+      console.log(data)
+
+      this.setState(prevState => {
+        const newState = {
+          ...prevState.data,
+          transactions: [...data, prevState.data.transactions],
+          loading: false
+        }
+        return { data: newState }
+      })
+    })
   }
 
   get balance() {
@@ -135,7 +152,9 @@ class App extends Component {
             onNoteChange={this.onNoteChange}
           />
         </Paper>
-        {this.hasTransactions && (
+        {this.loading || !this.transactions ? (
+          <p>loading...</p>
+        ) : (
           <Transactions
             transactions={this.transactions}
             transactionsCount={this.transactions.length}
