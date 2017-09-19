@@ -1,39 +1,43 @@
-import React from 'react'
+import React, { PureComponent } from 'react'
 import glamorous from 'glamorous'
 import moment from 'moment'
 
-const UnstyledTransactions = ({ transactions, transactionsCount, ...rest }) => {
-  return (
-    <div {...rest}>
-      <table>
-        <caption>
-          Statement Summary <small>({transactionsCount} items)</small>
-        </caption>
-        <thead>
-          <tr>
-            <th scope="col">Amount</th>
-            <th scope="col">Note</th>
-            <th scope="col">Type</th>
-            <th scope="col">Balance</th>
-            <th scope="col">Date</th>
-          </tr>
-        </thead>
-        <tbody>
-          {transactions.map((transaction, index) => (
-            <tr key={index}>
-              <td data-label="Amount">{transaction.amount}</td>
-              <td data-label="Due Date">{transaction.note}</td>
-              <td data-label="Type">{transaction.type}</td>
-              <td data-label="Balance">{transaction.balance}</td>
-              <td data-label="Date">
-                {moment(transaction.date).format('Do MMM | h:mm a')}
-              </td>
+class UnstyledTransactions extends PureComponent {
+  render() {
+    console.log('transactions table rendering')
+    const { transactionsCount, transactions, ...rest } = this.props
+    return (
+      <div {...rest}>
+        <table>
+          <caption>
+            Statement Summary <small>({transactionsCount} items)</small>
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col">Amount</th>
+              <th scope="col">Note</th>
+              <th scope="col">Type</th>
+              <th scope="col">Balance</th>
+              <th scope="col">Date</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  )
+          </thead>
+          <tbody>
+            {transactions.map((transaction, index) => (
+              <tr key={index}>
+                <td data-label="Amount">{transaction.amount}</td>
+                <td data-label="Due Date">{transaction.note}</td>
+                <td data-label="Type">{transaction.type}</td>
+                <td data-label="Balance">{transaction.balance}</td>
+                <td data-label="Date">
+                  {moment(transaction.date).format('Do MMM | h:mm a')}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    )
+  }
 }
 
 const Transactions = glamorous(UnstyledTransactions)({

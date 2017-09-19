@@ -1,6 +1,7 @@
 import React from 'react'
 
 import glamorous from 'glamorous'
+import { pure } from 'recompose'
 
 const buttonTheme = {
   green: 'rgba(47, 196, 93, 0.94)',
@@ -39,4 +40,4 @@ const Button = glamorous(UnStyledButton)(
 
 Button.displayName = 'Button'
 
-export default Button
+export default pure(Button)
