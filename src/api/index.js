@@ -10,10 +10,10 @@ const addTransaction = newTransactionData => (prevState, props) => {
   return { data }
 }
 
-const latestTransactionBalance = (transactionsData, defaultBalance) => {
-  let latestTransactionBalance =
+const latestTransactionBalance = transactionsData => {
+  return (
     transactionsData && transactionsData[transactionsData.length - 1].balance
-  return latestTransactionBalance || defaultBalance
+  )
 }
 
 const calculateNewBalance = ({ oldBalance, amount, type }) =>
