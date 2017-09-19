@@ -1,28 +1,84 @@
 {
   "transactions": [
     {
-      "amount": 2000,
-      "date": "2017-09-19T02:23:56.693Z",
+      "amount": 6500,
+      "date": "2017-09-19T05:27:21.414Z",
       "type": "Deposit",
       "note": "salary",
-      "balance": 4300,
+      "balance": 8800,
       "id": 1
     },
     {
-      "amount": 1000,
-      "date": "2017-09-19T02:23:56.693Z",
+      "amount": 2000,
+      "date": "2017-09-19T05:27:21.414Z",
       "type": "Deposit",
       "note": "retainer",
-      "balance": 5300,
+      "balance": 10800,
       "id": 2
     },
     {
       "amount": 500,
-      "date": "2017-09-05T02:23:56.000Z",
+      "date": "2017-09-19T05:27:21.414Z",
+      "type": "Expense",
+      "note": "lunch",
+      "balance": 10300,
+      "id": 3
+    },
+    {
+      "amount": 350,
+      "date": "2017-08-01T05:27:21.000Z",
       "type": "Expense",
       "note": "travel",
-      "balance": 4800,
-      "id": 3
+      "balance": 9950,
+      "id": 4
+    },
+    {
+      "amount": 5500,
+      "date": "2017-09-20T05:33:14.000Z",
+      "type": "Deposit",
+      "note": "September Bonus",
+      "balance": 15450,
+      "id": 5
+    },
+    {
+      "amount": 2000,
+      "date": "2017-09-19T05:33:14.655Z",
+      "type": "Deposit",
+      "note": "gift",
+      "balance": 17450,
+      "id": 6
+    },
+    {
+      "amount": 800,
+      "date": "2017-09-19T05:34:44.869Z",
+      "type": "Expense",
+      "note": "client lunch",
+      "balance": 16650,
+      "id": 7
+    },
+    {
+      "amount": 2000,
+      "date": "2017-09-21T05:36:13.000Z",
+      "type": "Deposit",
+      "note": "future raise",
+      "balance": 18650,
+      "id": 8
+    },
+    {
+      "amount": 2150,
+      "date": "2017-09-19T05:45:13.834Z",
+      "type": "Expense",
+      "note": "travel to singapore",
+      "balance": 16500,
+      "id": 9
+    },
+    {
+      "amount": 1350,
+      "date": "2017-08-07T05:45:13.000Z",
+      "type": "Expense",
+      "note": "bankok food",
+      "balance": 15150,
+      "id": 10
     }
   ]
 }

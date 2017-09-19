@@ -29,6 +29,7 @@ class App extends Component {
 
   initialState = {
     data: {
+      currentBalance: null,
       transactions: []
     },
     form: {
@@ -53,7 +54,12 @@ class App extends Component {
     this.setState(UI.startLoading())
     try {
       const { data } = await HTTP.loadTransactions()
-      this.setState(Api.setTransactions(data))
+      let currentBalance = Api.latestTransactionBalance(
+        data,
+        App.DEFAULT_BALANCE_AMOUNT
+      )
+
+      this.setState(Api.getTransactionsAndBalance(data, { currentBalance }))
     } catch (error) {
       // fire notification - data not loaded
       // setState - set a flag to show try again ui
@@ -62,14 +68,16 @@ class App extends Component {
   }
 
   get balance() {
-    return (
-      (this.hasTransactions &&
-        this.transactions[this.transactions.length - 1].balance) ||
-      App.DEFAULT_BALANCE_AMOUNT
-    )
+    return this.state.data.currentBalance
   }
 
-  get transactionsSortedByDate() {
+  get transactionsSortedByOldestDate() {
+    return this.transactions.sort(function(left, right) {
+      return moment.utc(left.date).diff(moment.utc(right.date))
+    })
+  }
+
+  get transactionsSortedByLatestDate() {
     return this.transactions.sort(function(left, right) {
       return moment.utc(right.date).diff(moment.utc(left.date))
     })
@@ -200,7 +208,7 @@ class App extends Component {
           <p>loading...</p>
         ) : (
           <Transactions
-            transactions={this.transactionsSortedByDate}
+            transactions={this.transactionsSortedByLatestDate}
             transactionsCount={this.transactions.length}
           />
         )}

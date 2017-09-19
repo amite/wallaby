@@ -3,19 +3,30 @@ import { DEPOSIT } from '../App'
 const addTransaction = newTransactionData => (prevState, props) => {
   const data = {
     ...prevState.data,
-    transactions: [...prevState.data.transactions, newTransactionData]
+    transactions: [...prevState.data.transactions, newTransactionData],
+    currentBalance: newTransactionData.balance
   }
 
   return { data }
 }
 
+const latestTransactionBalance = (transactionsData, defaultBalance) => {
+  let latestTransactionBalance =
+    transactionsData && transactionsData[transactionsData.length - 1].balance
+  return latestTransactionBalance || defaultBalance
+}
+
 const calculateNewBalance = ({ oldBalance, amount, type }) =>
   type === DEPOSIT ? oldBalance + amount : oldBalance - amount
 
-const setTransactions = transactionsData => (prevState, props) => {
+const getTransactionsAndBalance = (transactionsData, { currentBalance }) => (
+  prevState,
+  props
+) => {
   const newState = {
     ...prevState.data,
-    transactions: [...transactionsData]
+    transactions: [...transactionsData],
+    currentBalance
   }
   return { data: newState }
 }
@@ -25,6 +36,7 @@ export const hasMinimumBalance = (balance, expenditure) =>
 
 export default {
   addTransaction,
-  setTransactions,
-  calculateNewBalance
+  getTransactionsAndBalance,
+  calculateNewBalance,
+  latestTransactionBalance
 }
