@@ -1,5 +1,6 @@
 import React from 'react'
 import glamorous from 'glamorous'
+import moment from 'moment'
 
 const UnstyledTransactions = ({ transactions, transactionsCount, ...rest }) => {
   return (
@@ -14,6 +15,7 @@ const UnstyledTransactions = ({ transactions, transactionsCount, ...rest }) => {
             <th scope="col">Note</th>
             <th scope="col">Type</th>
             <th scope="col">Balance</th>
+            <th scope="col">Date</th>
           </tr>
         </thead>
         <tbody>
@@ -23,6 +25,9 @@ const UnstyledTransactions = ({ transactions, transactionsCount, ...rest }) => {
               <td data-label="Due Date">{transaction.note}</td>
               <td data-label="Type">{transaction.type}</td>
               <td data-label="Balance">{transaction.balance}</td>
+              <td data-label="Date">
+                {moment(transaction.date).format('Do MMM | h:mm a')}
+              </td>
             </tr>
           ))}
         </tbody>
@@ -34,6 +39,7 @@ const UnstyledTransactions = ({ transactions, transactionsCount, ...rest }) => {
 const Transactions = glamorous(UnstyledTransactions)({
   margin: '0 auto',
   maxWidth: '97%',
+  fontSize: '0.8em',
   marginTop: '18%',
   background: 'ghostwhite',
   padding: '20px 0px',

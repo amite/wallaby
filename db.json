@@ -2,67 +2,27 @@
   "transactions": [
     {
       "amount": 2000,
-      "date": "2017-09-18T14:06:38.839Z",
+      "date": "2017-09-19T02:23:56.693Z",
       "type": "Deposit",
-      "note": "aaa",
+      "note": "salary",
       "balance": 4300,
       "id": 1
     },
     {
-      "amount": 500,
-      "date": "2017-09-18T14:06:38.839Z",
-      "type": "Expense",
-      "note": "bbb",
-      "balance": 3800,
+      "amount": 1000,
+      "date": "2017-09-19T02:23:56.693Z",
+      "type": "Deposit",
+      "note": "retainer",
+      "balance": 5300,
       "id": 2
     },
     {
-      "amount": 2000,
-      "date": "2017-09-18T14:10:05.954Z",
-      "type": "Deposit",
-      "note": "ccc",
-      "balance": 5800,
-      "id": 3
-    },
-    {
-      "amount": 2000,
-      "date": "2017-09-18T14:10:30.795Z",
-      "type": "Deposit",
-      "note": "ddd",
-      "balance": 7800,
-      "id": 4
-    },
-    {
       "amount": 500,
-      "date": "2017-09-18T14:10:30.795Z",
+      "date": "2017-09-05T02:23:56.000Z",
       "type": "Expense",
-      "note": "eee",
-      "balance": 7300,
-      "id": 5
-    },
-    {
-      "amount": 3000,
-      "date": "2017-09-18T14:10:30.795Z",
-      "type": "Expense",
-      "note": "big",
-      "balance": 4300,
-      "id": 6
-    },
-    {
-      "amount": 3000,
-      "date": "2017-09-18T14:10:30.795Z",
-      "type": "Expense",
-      "note": "bigg",
-      "balance": 1300,
-      "id": 7
-    },
-    {
-      "amount": 7000,
-      "date": "2017-09-18T14:14:56.082Z",
-      "type": "Deposit",
-      "note": "slasd",
-      "balance": 8300,
-      "id": 8
+      "note": "travel",
+      "balance": 4800,
+      "id": 3
     }
   ]
 }

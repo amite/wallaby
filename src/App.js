@@ -69,6 +69,12 @@ class App extends Component {
     )
   }
 
+  get transactionsSortedByDate() {
+    return this.transactions.sort(function(left, right) {
+      return moment.utc(right.date).diff(moment.utc(left.date))
+    })
+  }
+
   get transactions() {
     return this.state.data.transactions
   }
@@ -194,7 +200,7 @@ class App extends Component {
           <p>loading...</p>
         ) : (
           <Transactions
-            transactions={this.transactions}
+            transactions={this.transactionsSortedByDate}
             transactionsCount={this.transactions.length}
           />
         )}
