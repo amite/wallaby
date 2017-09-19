@@ -4,7 +4,6 @@ import moment from 'moment'
 
 class UnstyledTransactions extends PureComponent {
   render() {
-    console.log('transactions table rendering')
     const { transactionsCount, transactions, ...rest } = this.props
     return (
       <div {...rest}>

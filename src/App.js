@@ -186,8 +186,6 @@ class App extends Component {
   }
 
   render() {
-    console.log('rendering')
-
     const { isActive, message, isLoading } = this.state.ui
     return (
       <Wrapper size="small">
