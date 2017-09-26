@@ -43,7 +43,7 @@ const Transactions = glamorous(UnstyledTransactions)({
   margin: '0 auto',
   maxWidth: '97%',
   fontSize: '0.8em',
-  marginTop: '18%',
+  marginTop: '10%',
   background: 'ghostwhite',
   padding: '20px 0px',
   boxShadow:
